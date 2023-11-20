@@ -1,4 +1,3 @@
-// CustomFooter.js
 import React from 'react';
 import { Layout, Row, Col } from 'antd';
 import { FacebookOutlined, InstagramOutlined, GithubOutlined } from '@ant-design/icons';
@@ -11,7 +10,7 @@ const CustomFooter = () => {
       <Row gutter={16} justify="center">
         <Col span={8}>
           <h3>Contact Us</h3>
-          <p style={{ padding: '0 20px' }}>Email: scoutmd@nucesprojects.com</p>
+          <p style={{ padding: '0 20px' }}>Email: help@scoutmd.com</p>
           <p style={{ padding: '0 20px' }}>Phone: +923000000000</p>
         </Col>
         <Col span={8}>

@@ -3,7 +3,7 @@ import { Typography, Row, Col, Card, Avatar } from 'antd';
 
 const { Title, Paragraph } = Typography;
 
-const Dashboard = () => {
+const Home = () => {
   const developers = [
     { name: 'Fahad Waseem', imageUrl: 'https://cdn-icons-png.flaticon.com/512/4086/4086679.png' },
     { name: 'Muhammad Abdullah', imageUrl: 'https://cdn-icons-png.flaticon.com/512/3445/3445053.png' },
@@ -58,4 +58,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Home;

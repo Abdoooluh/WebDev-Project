@@ -6,16 +6,11 @@ import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Dashboard from './components/Dashboard';
 import CustomFooter from './components/Footer';
+import LoginSignupPage from './components/LoginSignupPage';
 
 const { Header, Content } = Layout;
 
 const App = () => {
-  const [tab, setTab] = useState("Home");
-  const [loggedIn, setLoggedIn] = useState(false);
-
-
-
-
   return (
     <Router>
       <Layout>
@@ -26,6 +21,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/login" element={<LoginSignupPage />} />
           </Routes>
         </Content>
         <CustomFooter />

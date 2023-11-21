@@ -20,8 +20,8 @@ const Navbar = () => {
             <Menu.Item key="search" icon={<HomeOutlined />}>
                 Doctor Search
             </Menu.Item>
-            <Menu.Item key="login" icon={<InfoCircleOutlined />} style={{ float: 'right' }}>
-                About Us
+            <Menu.Item key="aboutus" icon={<InfoCircleOutlined />} style={{ float: 'right' }}>
+            <Link to="/aboutus">About Us</Link>
             </Menu.Item>
             <Menu.Item key="signup" icon={<UserOutlined />} style={{ float: 'right' }}>
             <Link to="/userprofile">User Profile</Link>

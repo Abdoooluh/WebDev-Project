@@ -24,7 +24,7 @@ const Navbar = () => {
                 About Us
             </Menu.Item>
             <Menu.Item key="signup" icon={<UserOutlined />} style={{ float: 'right' }}>
-            <Link to="/login">User Profile</Link>
+            <Link to="/userprofile">User Profile</Link>
             </Menu.Item>
         </Menu>
     );

@@ -1,6 +1,7 @@
-import React from "react";
-import { Card, Avatar, Typography } from "antd";
+import React, { useState } from "react";
+import { Card, Avatar, Typography, Button, Modal } from "antd";
 import "./UserProfile.css";
+import EditProfile from "../EditProfile/EditProfile";
 
 const { Meta } = Card;
 const { Text } = Typography;
@@ -15,8 +16,32 @@ const UserProfile = ({
   allergies,
   bloodGroup,
 }) => {
+  const [edit, setEdit] = useState(false);
+
+  const startEdit = () => {
+    setEdit(true);
+  };
+
+  const stopEdit = () => {
+    setEdit(false);
+  };
+
   return (
     <div className="profileRoot">
+      <Modal open={edit} title="Edit User Profile" onCancel={stopEdit}>
+        <EditProfile
+          {...{
+            name,
+            age,
+            gender,
+            weight,
+            height,
+            profilePicture,
+            allergies,
+            bloodGroup,
+          }}
+        ></EditProfile>
+      </Modal>
       <Card
         className="profileCard"
         cover={
@@ -33,6 +58,9 @@ const UserProfile = ({
           />
         }
       >
+        <Button className="editButton" onClick={startEdit}>
+          Edit Profile
+        </Button>
         <Meta
           title={<Text style={{ "font-size": "30px" }}>{name}</Text>}
           description={`Age: ${age} | Gender: ${gender} | Blood Group: ${bloodGroup}`}
@@ -50,7 +78,9 @@ const UserProfile = ({
           <Meta title="Allergies" />
           <ul>
             {allergies.map((allergy, index) => (
-              <li className="allergyList" key={index}>{allergy}</li>
+              <li className="allergyList" key={index}>
+                {allergy}
+              </li>
             ))}
           </ul>
         </Card>

@@ -7,13 +7,6 @@ import Home from "./components/Home";
 import Dashboard from "./components/Dashboard";
 import CustomFooter from "./components/Footer";
 import UserProfile from "./components/UserProfile/UserProfile";
-import React, { useState } from 'react';
-import { Layout } from 'antd';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Home from './components/Home';
-import Dashboard from './components/Dashboard';
-import CustomFooter from './components/Footer';
 import LoginSignupPage from './components/LoginSignupPage';
 import AboutUs from './components/AboutUs';
 

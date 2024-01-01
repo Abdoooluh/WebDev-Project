@@ -14,6 +14,9 @@ const Home = () => {
             <Paragraph style={{ fontSize: '2rem' }}>
               Access to appointments with top healthcare specialists from all around Pakistan with ease.
             </Paragraph>
+            <Paragraph style={{ fontSize: '2rem' }}>
+              Answer a few simple questions to find the right specialist for your needs and book your appointment seamlessly.
+            </Paragraph>
           </div>
         </Col>
         <Col xs={24} sm={24} md={12} lg={12} xl={12}>

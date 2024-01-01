@@ -64,30 +64,16 @@ const AppointmentsOverviewTable = () => {
   );
 };
 
-const RecentActivity = ({ recentActivityData }) => {
-  return (
-    <Card title="Recent Activity" style={{ marginBottom: '20px' }}>
-      {recentActivityData.length > 0 ? (
-        // Add code to render recent activity items
-        // Example: recentActivityData.map(item => <div key={item.id}>{item.activity}</div>)
-        null
-      ) : (
-        <p>There are no recent activities</p>
-      )}
-    </Card>
-  );
-};
-
-const UserProfile = () => {
+const UserProfile = (user) => {
   return (
     <Card title="User Profile" style={{ marginBottom: '20px' }}>
       <Row gutter={16} align="middle">
         <Col span={6}>
-          <Avatar size={64} icon={<UserOutlined />} />
+          <Avatar size={64} src={user.profilePicture} icon={<UserOutlined />} />
         </Col>
         <Col span={18}>
-          <p>Name: Thanos </p>
-          <p>Email: thanos@mcu.com</p>
+          <p>Name: {user.name} </p>
+          <p>Email: {user.email}</p>
           {/* Add more user profile information as needed */}
         </Col>
       </Row>
@@ -95,8 +81,7 @@ const UserProfile = () => {
   );
 };
 
-const Dashboard = () => {
-  const recentActivityData = []; // Add your recent activity data array here
+const Dashboard = ( user ) => {
 
   return (
     <Content style={{ padding: '20px' }}>
@@ -107,10 +92,7 @@ const Dashboard = () => {
         <Col xs={24} lg={7}>
           <Row gutter={[16, 16]}>
             <Col xs={24}>
-              <UserProfile />
-            </Col>
-            <Col xs={24}>
-              <RecentActivity recentActivityData={recentActivityData} />
+              <UserProfile {...user} />
             </Col>
           </Row>
         </Col>

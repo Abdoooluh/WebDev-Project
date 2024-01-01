@@ -9,6 +9,8 @@ import CustomFooter from "./components/Footer";
 import UserProfile from "./components/UserProfile/UserProfile";
 import LoginSignupPage from './components/LoginSignupPage';
 import AboutUs from './components/AboutUs';
+import QuestionnaireForm from "./components/SearchDoctor";
+import DoctorProfile from "./components/DoctorProfile";
 
 const { Header, Content } = Layout;
 
@@ -17,7 +19,8 @@ const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
 
   const user = {
-    name: "Nawaz Shareef",
+    name: "Nawaz Sharif",
+    email: "nawazsharifmns@gmail.com",
     age: 70,
     gender: "Male",
     weight: 90,
@@ -36,10 +39,12 @@ const App = () => {
         <Content>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/dashboard" element={<Dashboard {...user} />} />
             <Route path="/userprofile" element={<UserProfile {...user} />} />
             <Route path="/login" element={<LoginSignupPage />} />
             <Route path="/aboutus" element={<AboutUs />} />
+            <Route path="/search" element={<QuestionnaireForm />} />
+            <Route path="/doctor" element={<DoctorProfile />} />
           </Routes>
         </Content>
         <CustomFooter />

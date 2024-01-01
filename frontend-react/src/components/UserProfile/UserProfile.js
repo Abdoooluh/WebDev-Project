@@ -1,13 +1,10 @@
-import React, { useState } from "react";
-import { Card, Avatar, Typography, Button, Modal } from "antd";
-import "./UserProfile.css";
+import React, { useState } from 'react';
+import { Card, Avatar, Divider, Modal, Button } from 'antd';
 import EditProfile from "../EditProfile/EditProfile";
-
-const { Meta } = Card;
-const { Text } = Typography;
 
 const UserProfile = ({
   name,
+  email,
   age,
   gender,
   weight,
@@ -16,6 +13,33 @@ const UserProfile = ({
   allergies,
   bloodGroup,
 }) => {
+  const cardStyle = {
+    maxWidth: '400px',
+    margin: '50px auto',
+    boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+  };
+
+  const imageStyle = {
+    textAlign: 'center',
+    marginBottom: '20px',
+  };
+
+  const detailsStyle = {
+    textAlign: 'left',
+    padding: '0 20px',
+  };
+
+  const allergiesCardStyle = {
+    maxWidth: '400px',
+    margin: '20px auto',
+    padding: '20px',
+    boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+  };
+
+  const buttonStyle = {
+    marginTop: 'auto', // Push the button to the bottom of the card
+  };
+
   const [edit, setEdit] = useState(false);
 
   const startEdit = () => {
@@ -27,11 +51,12 @@ const UserProfile = ({
   };
 
   return (
-    <div className="profileRoot">
+    <div>
       <Modal open={edit} title="Edit User Profile" onCancel={stopEdit}>
         <EditProfile
           {...{
             name,
+            email,
             age,
             gender,
             weight,
@@ -42,49 +67,31 @@ const UserProfile = ({
           }}
         ></EditProfile>
       </Modal>
-      <Card
-        className="profileCard"
-        cover={
-          <img
-            alt="profile"
-            src={profilePicture}
-            style={{
-              width: "100px",
-              height: "100px",
-              position: "absolute",
-              right: "5px",
-              top: "5px",
-            }}
-          />
-        }
-      >
-        <Button className="editButton" onClick={startEdit}>
+      <Card style={cardStyle} title="Patient Profile">
+        <div style={imageStyle}>
+          <Avatar size={150} src={profilePicture} alt="Patient Image" />
+        </div>
+        <div style={detailsStyle}>
+          <p><strong>Name:</strong> {name}</p>
+          <p><strong>Email:</strong> {email}</p>
+          <p><strong>Age:</strong> {age}</p>
+          <p><strong>Gender:</strong> {gender}</p>
+          <p><strong>Weight:</strong> {weight}</p>
+          <p><strong>Height:</strong> {height}</p>
+          <p><strong>Blood Group:</strong> {bloodGroup}</p>
+        </div>
+        <Button style={buttonStyle} onClick={startEdit}>
           Edit Profile
         </Button>
-        <Meta
-          title={<Text style={{ "font-size": "30px" }}>{name}</Text>}
-          description={`Age: ${age} | Gender: ${gender} | Blood Group: ${bloodGroup}`}
-        />
-        <div style={{ marginTop: 16 }}>
-          <Text strong>Weight:</Text> {weight} kg
-        </div>
-        <div>
-          <Text strong>Height:</Text> {height} cm
-        </div>
       </Card>
 
-      <div className="patientData">
-        <Card style={{ width: 400, margin: "20px auto" }}>
-          <Meta title="Allergies" />
-          <ul>
-            {allergies.map((allergy, index) => (
-              <li className="allergyList" key={index}>
-                {allergy}
-              </li>
-            ))}
-          </ul>
-        </Card>
-      </div>
+      <Card style={allergiesCardStyle} title="Allergies">
+        <ul style={{ listStyleType: 'disc', paddingLeft: '20px' }}>
+          {allergies.map((allergy, index) => (
+            <li key={index}>{allergy}</li>
+          ))}
+        </ul>
+      </Card>
     </div>
   );
 };

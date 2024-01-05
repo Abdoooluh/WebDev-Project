@@ -106,7 +106,7 @@ const DoctorProfile = () => {
     );
     Modal.success({
       title: "Appointment Confirmed",
-      content: `Your appointment with Dr. John Doe at ${selectedTimeSlot} has been confirmed.`,
+      content: `Your appointment with ${docData.name} at ${selectedTimeSlot} has been confirmed.`,
     });
   };
 

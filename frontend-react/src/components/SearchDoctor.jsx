@@ -1,20 +1,41 @@
 import React, { useState } from "react";
 import { Form, Card, Button, Radio, Input, Select } from "antd";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { Route, Routes } from "react-router-dom";
+import DoctorProfile from "./DoctorProfile";
 
 const { Option } = Select;
+
+const getDoctor = async (values) => {
+  try {
+    const res = await axios.post(
+      "//localhost:3000/api/doctor/searchDoctor",
+      values
+    );
+    console.log(res);
+    return res;
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 const QuestionnaireForm = () => {
   const navigate = useNavigate(); // Get the navigate function
   const [form] = Form.useForm();
   const [submissionData, setSubmissionData] = useState(null);
 
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     setSubmissionData(values);
+    console.log(values);
     // You can handle the submission logic here, such as sending data to a server.
-
+    const nextDoctor = await getDoctor(values).then(() => {
+      navigate("/doctor");
+    });
     // Redirect to the /doctor page after successful form submission
-    navigate('/doctor');
+    <Routes>
+      <Route path="/doctor" element={<DoctorProfile {...nextDoctor} />} />
+    </Routes>;
   };
 
   return (
@@ -58,8 +79,8 @@ const QuestionnaireForm = () => {
             <Option value="ent">Ear, Nose, Throat (ENT)</Option>
             <Option value="cardio">Cardiovascular</Option>
             <Option value="respiratory">Respiratory</Option>
-            <Option value="gastro">Gastrointestinal</Option>
-            <Option value="musculoskeletal">Musculoskeletal</Option>
+            <Option value="gastro">Gastric/Digestive</Option>
+            <Option value="musculoskeletal">Muscular/Skeletal</Option>
             <Option value="dermatological">Dermatological</Option>
             <Option value="neurological">Neurological</Option>
             <Option value="other">Other (please specify)</Option>

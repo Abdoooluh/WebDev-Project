@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, Avatar, Table, Button, Modal } from 'antd';
 
-const DoctorProfile = () => {
+const DoctorProfile = (props) => {
   const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
-
+  useEffect(()=>{console.log(props)}, [])
   const cardStyle = {
     maxWidth: '400px',
     margin: '50px auto',

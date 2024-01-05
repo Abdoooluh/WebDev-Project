@@ -44,7 +44,7 @@ const App = () => {
             <Route path="/login" element={<LoginSignupPage />} />
             <Route path="/aboutus" element={<AboutUs />} />
             <Route path="/search" element={<QuestionnaireForm />} />
-            {/* <Route path="/doctor" element={<DoctorProfile />} /> */}
+            <Route path="/doctor" element={<DoctorProfile />} />
           </Routes>
         </Content>
         <CustomFooter />

@@ -25,7 +25,6 @@ async function getDoctorBySpecialization(specialization) {
 
 // Route handler for the GET API
 router.get("/getDoctor/:specialization", async (req, res) => {
-  
   res.header("Access-Control-Allow-Origin", "*");
   try {
     const { specialization } = req.params;
@@ -44,33 +43,26 @@ router.get("/getDoctor/:specialization", async (req, res) => {
   }
 });
 
-// Route handler for the POST API
 router.post("/searchDoctor", async (req, res) => {
-  
   res.header("Access-Control-Allow-Credentials", "true");
   try {
-    // Assuming the request body contains the provided object
     const requestBody = req.body;
-    console.log("POST API CALLED");
-    console.log(requestBody);
-    
-    // Get the value of the "medicalConcern" key
     const medicalConcern = requestBody.medicalConcern;
-    
-    // Processing logic based on the "medicalConcern" value
     if (medicalConcern === "eye") {
       await getDoctorBySpecialization("Ophthalmologist").then((doctor) =>
-      res.json(doctor)
+        res.json(doctor)
       );
     } else if (medicalConcern === "ent") {
       await getDoctorBySpecialization("Otolaryngologist").then((doctor) =>
-      res.json(doctor)
+        res.json(doctor)
       );
     } else if (medicalConcern === "cardio") {
-      const doctor = await getDoctorBySpecialization("Cardiologist").then((doc) => {
-        res.send(doc);
-        console.log("inside then " + " " + doc);
-      });
+      const doctor = await getDoctorBySpecialization("Cardiologist").then(
+        (doc) => {
+          res.send(doc);
+          console.log("inside then " + " " + doc);
+        }
+      );
       console.log("outside then " + " " + doctor);
     } else if (medicalConcern === "respiratory") {
       await getDoctorBySpecialization("Pulmonologist").then((doctor) =>
@@ -100,5 +92,47 @@ router.post("/searchDoctor", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
+
+
+router.put('/updateBookingStatus/:doctorId/:timeslotKey', async (req, res) => {
+  try {
+    const { doctorId, timeslotKey } = req.params;
+
+    // Find the doctor by ID
+    const doctor = await Doctor.findById(doctorId);
+
+    if (!doctor) {
+      return res.status(404).json({ error: 'Doctor not found' });
+    }
+
+    // If timeSlots array doesn't exist, create it
+    if (!doctor.timeSlots) {
+      doctor.timeSlots = [];
+    }
+
+    // Find the timeslot by key
+    const timeslot = doctor.timeSlots.find(slot => slot.key === parseInt(timeslotKey));
+
+    if (!timeslot) {
+      return res.status(404).json({ error: 'Timeslot not found' });
+    }
+
+    // Update the bookingStatus to true
+    timeslot.bookingStatus = true;
+
+    // Save the updated doctor
+    await doctor.save();
+
+    // Return the updated doctor
+    return res.json(doctor);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+module.exports = router;
+
 
 module.exports = router;

@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { Card, Avatar, Table, Button, Modal } from "antd";
 import { useLocation } from "react-router-dom";
+import axios from "axios";
 
 const DoctorProfile = () => {
   const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
+  const [selectedSlotKey, setSelectedSlotKey] = useState(null);
   const location = useLocation();
-  const [docData, setDocData] = useState({"imageUrl":"",
-  "name":"",
-  "specialization":"",
-  "qualifications":["",""],
-  "timeSlots":[]});
+  const [docData, setDocData] = useState({
+    imageUrl: "",
+    name: "",
+    specialization: "",
+    qualifications: ["", ""],
+    timeSlots: [],
+  });
   useEffect(() => {
     const doc = location.state?.nextDoctor;
     setDocData(doc);
-    console.log(docData)
+    console.log(docData);
   }, []);
 
   const cardStyle = {
@@ -56,7 +60,10 @@ const DoctorProfile = () => {
       render: (record) => (
         <Button
           type={record.isSelected ? "primary" : "default"}
-          onClick={() => handleSelectTimeSlot(record.time)}
+          onClick={() => {
+            handleSelectTimeSlot(record.time, record.key);
+            console.log(record);
+          }}
           disabled={record.isBooked}
         >
           Select
@@ -87,12 +94,16 @@ const DoctorProfile = () => {
       isSelected: selectedTimeSlot === slot.time,
     }));
 
-  const handleSelectTimeSlot = (time) => {
+  const handleSelectTimeSlot = (time, key) => {
+    setSelectedSlotKey(key);
     setSelectedTimeSlot(time);
   };
 
-  const handleConfirmAppointment = () => {
+  const handleConfirmAppointment = async () => {
     // Add logic to confirm the appointment with the selectedTimeSlot
+    await axios.put(
+      `//localhost:3000/api/doctor/updateBookingStatus/${docData._id}/${selectedSlotKey}`
+    );
     Modal.success({
       title: "Appointment Confirmed",
       content: `Your appointment with Dr. John Doe at ${selectedTimeSlot} has been confirmed.`,

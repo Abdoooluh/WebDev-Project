@@ -13,8 +13,7 @@ const getDoctor = async (values) => {
       "//localhost:3000/api/doctor/searchDoctor",
       values
     );
-    console.log(res);
-    return res;
+    return res.data;
   } catch (err) {
     console.log(err);
   }
@@ -29,7 +28,8 @@ const QuestionnaireForm = () => {
     setSubmissionData(values);
     console.log(values);
     // You can handle the submission logic here, such as sending data to a server.
-    const nextDoctor = await getDoctor(values).then(() => {
+    const nextDoctor = await getDoctor(values).then((nextDoctor) => {
+      console.log(nextDoctor.name)
       navigate("/doctor");
     });
     // Redirect to the /doctor page after successful form submission

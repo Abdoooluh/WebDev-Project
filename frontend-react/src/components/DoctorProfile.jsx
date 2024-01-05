@@ -3,7 +3,8 @@ import { Card, Avatar, Table, Button, Modal } from 'antd';
 
 const DoctorProfile = (props) => {
   const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
-  useEffect(()=>{console.log(props)}, [])
+  useEffect(()=>{console.log("inside profile now")
+    console.log(props.name)}, [])
   const cardStyle = {
     maxWidth: '400px',
     margin: '50px auto',
